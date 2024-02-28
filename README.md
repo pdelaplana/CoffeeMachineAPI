@@ -2,15 +2,15 @@
 
 ## Requirements 
 Design and implement an HTTP API that controls an imaginary internet-connected coffee machine.  Your solution should fulfil the following criteria: 
-1. When the endpoint GET /brew-coffee is called, the endpoint returns a 200 OK status code  with a status message and the current date/time in the response body as a JSON object, with  the date/time formatted as an ISO-8601 value e.g.  
+1. When the endpoint `GET /brew-coffee` is called, the endpoint returns a `200 OK` status code  with a status message and the current date/time in the response body as a JSON object, with  the date/time formatted as an ISO-8601 value e.g.  
 ```
 { 
  “message”: “Your piping hot coffee is ready”, 
  “prepared”: “2021-02-03T11:56:24+0900” 
 };
 ``` 
-2. On every fifth call to the endpoint defined in #1, the endpoint should return 503 Service  Unavailable with an empty response body, to signify that the coffee machine is out of  coffee; 
-3. If the date is April 1st, then all calls to the endpoint defined in #1 should return 418 I’m a  teapot instead, with an empty response body, to signify that the endpoint is not brewing  coffee today (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418); 
+2. On every fifth call to the endpoint defined in #1, the endpoint should return `503 Service Unavailable` with an empty response body, to signify that the coffee machine is out of  coffee; 
+3. If the date is April 1st, then all calls to the endpoint defined in #1 should return `418 I’m a teapot` instead, with an empty response body, to signify that the endpoint is not brewing  coffee today (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418); 
 Please either supply your solution as a Zip file, or create a public Git repository on e.g. GitHub or  BitBucket, and share the URL. 
 ## Non-functional Requirements 
 Your solution should: 
