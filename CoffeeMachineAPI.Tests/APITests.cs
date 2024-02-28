@@ -25,7 +25,7 @@ namespace CoffeeMachineAPI.Tests
         }
 
         [Fact]
-        public async void API_BrewCoffeeEndpoint_ShouldReturn200_WhenInvoked() 
+        public async void API_BrewCoffeeEndpoint_ShouldReturn200AndMessageContainsPipingHot_WhenInvoked() 
         {
             // arrange
             _mockCoffeeMachine.Setup(m => m.BrewAsync()).ReturnsAsync(new CoffeeIsReady());
@@ -35,10 +35,31 @@ namespace CoffeeMachineAPI.Tests
             
             // act
             var response = await client.GetAsync("api/v1/brew-coffee");
+            var status = response.StatusCode;
+            var message = (await response.Content.ReadAsStringAsync());   
 
             // assert
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, status);
+            Assert.Contains("Your piping hot coffee is ready", message);
+        }
 
+        [Fact]
+        public async void API_BrewCoffeeEndpoint_ShouldReturn200AndMessageContainsRefreshingIced_WhenInvoked()
+        {
+            // arrange
+            _mockCoffeeMachine.Setup(m => m.BrewAsync()).ReturnsAsync(new IcedCoffeeIsReady());
+
+            var application = await SetupWebApplication();
+            using var client = application.CreateClient();
+
+            // act
+            var response = await client.GetAsync("api/v1/brew-coffee");
+            var status = response.StatusCode;
+            var message = (await response.Content.ReadAsStringAsync());
+
+            // assert
+            Assert.Equal(HttpStatusCode.OK, status);
+            Assert.Contains("Your refreshing iced coffee is ready", message);
         }
 
         [Fact]

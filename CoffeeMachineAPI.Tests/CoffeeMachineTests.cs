@@ -1,5 +1,6 @@
 using CoffeeMachineAPI.Application;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace CoffeeMachineAPI.Tests
@@ -10,6 +11,8 @@ namespace CoffeeMachineAPI.Tests
         private readonly Mock<IMemoryCache> _mockMemoryCache = new();
         private readonly Mock<ICacheEntry> _mockCacheEntry = new();
         private readonly Mock<IDateTimeProvider> _mockDateTimeProvider = new();
+        private readonly Mock<IWeatherService> _mockWeatherService = new();
+        private readonly Mock<IOptions<WeatherServiceOptions>> _mockWeatherServiceOptions = new();
 
         public CoffeeMachineTests() 
         {
@@ -21,6 +24,11 @@ namespace CoffeeMachineAPI.Tests
             _mockDateTimeProvider.SetupGet(provider => provider.UTCNow).Returns(DateTime.UtcNow);
             _mockDateTimeProvider.Setup(provider => provider.Create(DateTime.UtcNow.Year, 4, 1)).Returns(new DateTime(DateTime.UtcNow.Year, 4, 1));
 
+           
+            var weatherServiceOptions = new WeatherServiceOptions() { ApiKey = "key", City = "Sydney" };
+            _mockWeatherServiceOptions.SetupGet(options => options.Value).Returns(weatherServiceOptions);
+
+            _mockWeatherService.Setup(service => service.GetTemperatureByCityAsync(It.IsAny<string>())).ReturnsAsync(0);
         }
 
         [Fact]
@@ -69,6 +77,36 @@ namespace CoffeeMachineAPI.Tests
             Assert.IsType<NotBrewing>(result);
         }
 
-        
+        [Fact]
+        public async void CoffeeMachineV2_Brew_ShouldReturnCoffeeIsReady_WhenInvokedAndTemperatureIsBelow30C()
+        {
+            // arrange
+            _mockWeatherService.Setup(service => service.GetTemperatureByCityAsync(It.IsAny<string>())).ReturnsAsync(10);
+
+            // act
+            ICoffeeMachine coffeeMachine = new CoffeeMachineV2(
+                _mockWeatherService.Object, _mockMemoryCache.Object, _mockDateTimeProvider.Object, _mockWeatherServiceOptions.Object, 5);
+            var result = await coffeeMachine.BrewAsync();
+
+            // assert
+            Assert.IsType<CoffeeIsReady>(result);
+        }
+
+        [Fact]
+        public async void CoffeeMachineV2_Brew_ShouldReturnIcedCoffeeIsReady_WhenInvokedAndTemperatureIsHigher30C()
+        {
+            // arrange
+            _mockWeatherService.Setup(service => service.GetTemperatureByCityAsync(It.IsAny<string>())).ReturnsAsync(31);
+
+            // act
+            ICoffeeMachine coffeeMachine = new CoffeeMachineV2(
+                _mockWeatherService.Object, _mockMemoryCache.Object, _mockDateTimeProvider.Object, _mockWeatherServiceOptions.Object, 5);
+            var result = await coffeeMachine.BrewAsync();
+
+            // assert
+            Assert.IsType<IcedCoffeeIsReady>(result);
+        }
+
+
     }
 }

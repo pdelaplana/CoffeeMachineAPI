@@ -1,5 +1,7 @@
+using CoffeeMachineAPI;
 using CoffeeMachineAPI.Application;
 using CoffeeMachineAPI.Endpoints.V1;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,17 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMemoryCache();
 
+builder.Services.AddHttpClient();
+
+builder.Services.Configure<WeatherServiceOptions>(options => {
+    options.ApiKey = builder.Configuration.GetSection("WeatherService").GetValue<string>("ApiKey") ?? "";
+    options.City = builder.Configuration.GetSection("WeatherService").GetValue<string>("City") ?? "";
+});
+
 builder.Services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
-builder.Services.AddSingleton<ICoffeeMachine, CoffeeMachine>();
+builder.Services.AddSingleton<IWeatherService, WeatherService>();
+builder.Services.AddSingleton<ICoffeeMachine, CoffeeMachineV2>();
+
 
 var app = builder.Build();
 

@@ -7,7 +7,6 @@ namespace CoffeeMachineAPI.Application
 
     public class CoffeeMachine(IMemoryCache memoryCache, IDateTimeProvider dateTimeProvider, int maxServiceRequestsCount = 5) : ICoffeeMachine
     {
-        
         private readonly IMemoryCache _memoryCache = memoryCache;
         private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
         private readonly int _maxServiceRequestsCount = maxServiceRequestsCount;

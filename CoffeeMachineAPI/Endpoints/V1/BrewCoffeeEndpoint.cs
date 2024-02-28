@@ -7,12 +7,12 @@ public class BrewCoffeeEndpoint
 {
     public static async Task<Results<Ok<BrewCoffeeResponse>, StatusCodeHttpResult>> Handle(ICoffeeMachine coffeeMachine)
     {
-
         var brewResult = await coffeeMachine.BrewAsync();
 
         switch (brewResult)
         {
             case CoffeeIsReady:
+            case IcedCoffeeIsReady:
                 var prepared = DateTime.Now;
                 return TypedResults.Ok(
                     new BrewCoffeeResponse(
