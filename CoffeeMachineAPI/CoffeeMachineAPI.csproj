@@ -14,13 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Application\CoffeeMachineV2.cs" />
-    <Compile Remove="Application\IWeatherService.cs" />
-    <Compile Remove="Application\WeatherService.cs" />
-    <Compile Remove="WeatherServiceOptions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
