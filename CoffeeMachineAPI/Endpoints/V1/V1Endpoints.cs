@@ -9,6 +9,7 @@
                 .WithName("BrewCoffeeV1")
                 .Produces<BrewCoffeeResponse>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status503ServiceUnavailable)
+                .Produces(StatusCodes.Status418ImATeapot)
                 .WithOpenApi();
 
         }
