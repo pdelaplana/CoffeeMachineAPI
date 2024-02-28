@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeMachineAPI", "CoffeeMachineAPI\CoffeeMachineAPI.csproj", "{BC167CD9-E0E4-40E5-8FDE-E893F94127C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeMachineAPI.Tests", "CoffeeMachineAPI.Tests\CoffeeMachineAPI.Tests.csproj", "{85CF981F-0004-4405-A4BB-B795B4ED710D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC167CD9-E0E4-40E5-8FDE-E893F94127C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC167CD9-E0E4-40E5-8FDE-E893F94127C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC167CD9-E0E4-40E5-8FDE-E893F94127C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC167CD9-E0E4-40E5-8FDE-E893F94127C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85CF981F-0004-4405-A4BB-B795B4ED710D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CF981F-0004-4405-A4BB-B795B4ED710D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85CF981F-0004-4405-A4BB-B795B4ED710D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85CF981F-0004-4405-A4BB-B795B4ED710D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82771D03-54DB-4A6D-84BB-C3E4E8A1C439}
+	EndGlobalSection
+EndGlobal

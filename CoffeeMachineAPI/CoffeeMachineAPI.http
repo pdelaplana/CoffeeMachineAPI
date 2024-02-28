@@ -1,0 +1,6 @@
+@CoffeeMachineAPI_HostAddress = http://localhost:5204
+
+GET {{CoffeeMachineAPI_HostAddress}}/api/v1/brew-coffee
+Accept: application/json
+
+###
